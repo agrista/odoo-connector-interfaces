@@ -86,7 +86,7 @@ class ImportRecordset(models.Model):
     @api.depends("backend_id.name")
     def _compute_name(self):
         for item in self:
-            names = [item.backend_id.name.strip(), "#" + str(item.id)]
+            names = [item.backend_id.name.strip() if item.backend_id else "", "#" + str(item.id)]
             item.name = " ".join(names)
 
     def get_records(self):
