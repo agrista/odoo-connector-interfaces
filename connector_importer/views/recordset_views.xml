@@ -9,7 +9,7 @@
                 <group col="4" name="main">
                     <group colspan="2" name="base" string="Base configuration">
                         <field name="name" readonly="1" />
-                        <field name="backend_id" options="{'no_create': True}" attrs="{'required': 1}" />
+                        <field name="backend_id" options="{'no_create': True}" required="1" />
                         <field name="import_type_id" options="{'no_create': True}" />
                         <field name="override_existing" />
                     </group>
