@@ -51,14 +51,12 @@ class TestRecordImporterXMLID(TestImporterBase):
         report = self.recordset.get_report()
         model = "res.partner"
         expected = {model: {"created": 10, "errored": 0, "updated": 0, "skipped": 0}}
-        delayable = res[model]
-        self.assertEqual(delayable.result, expected[model])
+        result = res[model]
+        self.assertEqual(result, expected[model])
         for k, v in expected[model].items():
             self.assertEqual(len(report[model][k]), v)
         self.assertEqual(self.env[model].search_count([("ref", "like", "id_%")]), 10)
         # Check XML-IDs
         for i in range(1, count + 1):
-            partner = self.env.ref(
-                "__import__.id_{}".format(i), raise_if_not_found=False
-            )
+            partner = self.env.ref(f"__import__.id_{i}", raise_if_not_found=False)
             self.assertTrue(partner)

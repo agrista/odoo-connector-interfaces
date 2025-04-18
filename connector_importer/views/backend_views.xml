@@ -33,23 +33,10 @@
                             <field name="cron_mode" />
                             <field name="debug_mode" />
                         </group>
-                        <group
-                            colspan="2"
-                            string="Cron"
-                            invisible="not cron_mode"
-                        >
-                            <field
-                                name="cron_start_date"
-                                required="cron_mode"
-                            />
-                            <field
-                                name="cron_interval_number"
-                                required="cron_mode"
-                            />
-                            <field
-                                name="cron_interval_type"
-                                required="cron_mode"
-                            />
+                        <group colspan="2" string="Cron" invisible="not cron_mode">
+                            <field name="cron_start_date" required="cron_mode" />
+                            <field name="cron_interval_number" required="cron_mode" />
+                            <field name="cron_interval_type" required="cron_mode" />
                             <field name="cron_id" readonly="1" />
                             <field name="cron_master_recordset_id" />
                             <field name="cron_cleanup_keep" />
@@ -71,7 +58,7 @@
                             <field
                                 name="recordset_ids"
                                 nolabel="1"
-                                context="{'default_backend_id': active_id}"
+                                context="{'default_backend_id': id}"
                             >
                                 <tree>
                                     <field name="sequence" widget="handle" />
@@ -91,7 +78,10 @@
                                         class="oe_highlight"
                                         string="Import"
                                     />
-                                    <field name="source_model" invisible="1" />
+                                    <field
+                                        name="source_model"
+                                        column_invisible="True"
+                                    />
                                     <button
                                         name="open_source_config"
                                         type="object"

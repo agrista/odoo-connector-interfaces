@@ -79,6 +79,11 @@ class CSVSource(models.Model):
                 # in v11 binary fields now can return the size of the file
                 item.csv_filesize = self.with_context(bin_size=True).csv_file
 
+    def _generate_csv_reader(self, reader_args):
+        """Create and return a CSV reader instance."""
+        reader = self._csv_reader_klass(**reader_args)
+        return reader
+
     def _get_lines(self):
         # read CSV
         reader_args = {
@@ -94,7 +99,7 @@ class CSVSource(models.Model):
         else:
             return iter([])
 
-        reader = self._csv_reader_klass(**reader_args)
+        reader = self._generate_csv_reader(reader_args)
         return reader.read_lines()
 
     def _get_example_attachment(self):
@@ -104,7 +109,7 @@ class CSVSource(models.Model):
             source_xmlid = self.get_external_id()[self.id]
             if not source_xmlid:
                 return
-            xmlid = "{}_example_file".format(source_xmlid)
+            xmlid = f"{source_xmlid}_example_file"
         return self.env.ref(xmlid, raise_if_not_found=0)
 
     @api.depends("example_file_ext_id")
@@ -113,4 +118,4 @@ class CSVSource(models.Model):
             source.example_file_url = False
             att = source._get_example_attachment()
             if att:
-                source.example_file_url = "/web/content/{}/{}".format(att.id, att.name)
+                source.example_file_url = f"/web/content/{att.id}/{att.name}"

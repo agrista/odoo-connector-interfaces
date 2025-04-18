@@ -97,7 +97,7 @@
                             name="server_action_ids"
                             nolabel="1"
                             colspan="4"
-                            invisible="server_action_trigger_on =='never'"
+                            invisible="server_action_trigger_on == 'never'"
                             domain="[('model_id', 'in', server_action_importable_model_ids)]"
                         >
                             <tree>
