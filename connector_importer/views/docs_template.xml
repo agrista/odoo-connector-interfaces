@@ -61,6 +61,7 @@
                                                     t-value="required[source_key]"
                                                 />
                                                 <tr>
+<!--
                                                     <td class="text-left">
                                                         <t
                                                             t-if="source_key.startswith('__')"
@@ -76,6 +77,7 @@
                                                             t-out="', '.join([key for key in dest_keys if not key.startswith('__')])"
                                                         />
                                                     </td>
+-->
                                                 </tr>
                                             </t>
                                         </tbody>
