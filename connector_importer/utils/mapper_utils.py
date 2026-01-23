@@ -269,7 +269,7 @@ def backend_to_rel(  # noqa: C901
         if column.type.endswith("2many"):
             # we need multiple values
             search_operator = "in"
-            if not isinstance(search_value, (list | tuple)):
+            if not isinstance(search_value, (list, tuple)):
                 search_value = [search_value]
 
         if modifier.search_operator:
@@ -309,7 +309,7 @@ def backend_to_rel(  # noqa: C901
     ):
         if (
             column.type.endswith("2many")
-            and isinstance(search_value, (list | tuple))
+            and isinstance(search_value, (list, tuple))
             and not len(search_value) == len(value or [])
         ):
             # make sure we consider all the values and related records

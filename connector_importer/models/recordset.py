@@ -243,7 +243,7 @@ class ImportRecordset(models.Model):
         report = self.get_report()
         data = {
             "recordset": self,
-            "last_start": report.pop("_last_start"),
+            "last_start": report.pop("_last_start", None),
             "report_by_model": self._get_report_by_model(),
         }
         return data
